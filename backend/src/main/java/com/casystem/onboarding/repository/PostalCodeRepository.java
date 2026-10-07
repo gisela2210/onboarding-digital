@@ -1,0 +1,3 @@
+package com.casystem.onboarding.repository;
+import org.springframework.jdbc.core.JdbcTemplate;import org.springframework.stereotype.Repository;import java.util.*;
+@Repository public class PostalCodeRepository{private final JdbcTemplate db;public PostalCodeRepository(JdbcTemplate d){db=d;}public List<Map<String,Object>> find(String cp){return db.queryForList("select state,municipality,settlement from postal_codes where postal_code=? order by settlement",cp);}public List<String> municipalities(String state){return db.queryForList("select distinct municipality from postal_codes where state=? order by municipality",String.class,state);}}

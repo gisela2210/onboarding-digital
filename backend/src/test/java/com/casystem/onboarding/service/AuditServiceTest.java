@@ -1,0 +1,3 @@
+package com.casystem.onboarding.service;
+import com.casystem.onboarding.model.AuditLog;import com.casystem.onboarding.repository.AuditLogRepository;import org.junit.jupiter.api.Test;import static org.mockito.Mockito.*;import static org.junit.jupiter.api.Assertions.*;import org.mockito.ArgumentCaptor;
+class AuditServiceTest{@Test void guardaAuditoria(){AuditLogRepository r=mock(AuditLogRepository.class);new AuditService(r).log(4L,"LOGIN","127.0.0.1");ArgumentCaptor<AuditLog> c=ArgumentCaptor.forClass(AuditLog.class);verify(r).save(c.capture());assertEquals(4L,c.getValue().getUserId());assertEquals("LOGIN",c.getValue().getAction());assertEquals("127.0.0.1",c.getValue().getIp());}}
